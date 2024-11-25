@@ -14,11 +14,11 @@ This is a simple CRUD (Create, Read, Update, Delete) application built with Reac
 
 The application uses https://jsonplaceholder.typicode.com as a mock API for user data. The following endpoints are utilized:
 
-**GET /users** - Fetch all users.
-**GET /users/:id** - Fetch details of a specific user.
-**POST /users** - Add a new user.
-**PUT /users/:id** - Update user information.
-**DELETE /users/:id** - Delete a user.
+- **GET /users** - Fetch all users.
+- **GET /users/:id** - Fetch details of a specific user.
+- **POST /users** - Add a new user.
+- **PUT /users/:id** - Update user information.
+- **DELETE /users/:id** - Delete a user.
 
 ## Pagination
 
@@ -41,3 +41,7 @@ This application includes basic error handling for a better user experience.
 # Form Validation
 
 - Ensures all required fields are filled before submission while creating a new user.
+
+### Deployement Link
+
+
