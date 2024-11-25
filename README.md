@@ -29,19 +29,19 @@ The application uses https://jsonplaceholder.typicode.com as a mock API for user
 
 This application includes basic error handling for a better user experience.
 
-# API Errors
+## API Errors
 
 - Displays an alert when an API request fails (e.g., unable to fetch data, add, update, or delete a user).
 - Example: If data fetching fails, the user sees a message: **"Error Fetching the data"**.
 
-# Delete Confirmation
+## Delete Confirmation
 
 - Before deleting a user, a confirmation popup asks: **"Would you like to delete this user?"**.
 
-# Form Validation
+## Form Validation
 
 - Ensures all required fields are filled before submission while creating a new user.
 
-### Deployment Link
+# Deployment Link
 
 https://ajackus-reactjs-crud-app.netlify.app
