@@ -42,6 +42,6 @@ This application includes basic error handling for a better user experience.
 
 - Ensures all required fields are filled before submission while creating a new user.
 
-### Deployement Link
+### Deployment Link
 
 https://ajackus-reactjs-crud-app.netlify.app
