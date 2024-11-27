@@ -5,14 +5,16 @@ import { Link } from "react-router-dom";
 const Home = () => {
   const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [inputValue, setInputValue] = useState(1); 
   const itemsPerPage = 5;
 
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        "https://jsonplaceholder.typicode.com/users"
+        "https://6747148d38c8741641d54f0f.mockapi.io/users"
       );
       setData(response.data);
+      console.log(response.data)
     } catch (error) {
       alert("Error Fetching the data");
     }
@@ -30,11 +32,41 @@ const Home = () => {
   const totalPages = Math.ceil(data.length / itemsPerPage);
 
   const handleNext = () => {
-    if (currentPage < totalPages) setCurrentPage((prev) => prev + 1);
+    if (currentPage < totalPages) {
+      setCurrentPage((prev) => {
+        const newPage = prev + 1;
+        setInputValue(newPage); 
+        return newPage;
+      });
+    }
+  };
+  
+  const handlePrevious = () => {
+    if (currentPage > 1) {
+      setCurrentPage((prev) => {
+        const newPage = prev - 1;
+        setInputValue(newPage); 
+        return newPage;
+      });
+    }
   };
 
-  const handlePrevious = () => {
-    if (currentPage > 1) setCurrentPage((prev) => prev - 1);
+  const handlePageInput = (value) => {
+    const pageNumber = parseInt(value, 10);
+    if (!isNaN(pageNumber)) {
+      setInputValue(pageNumber);
+    } else {
+      setInputValue(""); 
+    }
+  };
+  
+  const handlePageJump = () => {
+    if (inputValue >= 1 && inputValue <= totalPages) {
+      setCurrentPage(inputValue);
+    } else {
+      alert("Please enter a valid page number.");
+      setInputValue(currentPage); 
+    }
   };
 
   const handleDelete = async (id) => {
@@ -42,7 +74,7 @@ const Home = () => {
     try {
       if (confirm) {
         const response = await axios.delete(
-          "https://jsonplaceholder.typicode.com/users/" + id
+          "https://6747148d38c8741641d54f0f.mockapi.io/users/" + id
         );
         console.log(response.status);
         if (response.status === 200) {
@@ -77,17 +109,13 @@ const Home = () => {
           </thead>
           <tbody>
             {currentData.map((user) => {
-              const nameParts = user.name.split(" ");
-              const firstName = nameParts[0];
-              const lastName = nameParts.slice(1).join(" ");
-
               return (
                 <tr key={user.id}>
                   <td>{user.id}</td>
-                  <td>{firstName}</td>
-                  <td>{lastName}</td>
+                  <td>{user.firstname}</td>
+                  <td>{user.lastname}</td>
                   <td>{user.email}</td>
-                  <td>{user.company.bs}</td>
+                  <td>{user.department}</td>
                   <td>
                     <div style={{ display: "flex", gap: "8px" }}>
                       <Link
@@ -116,24 +144,36 @@ const Home = () => {
           </tbody>
         </table>
         <div className="d-flex justify-content-between align-items-center mt-3">
-          <button
-            className="btn btn-secondary"
-            onClick={handlePrevious}
-            disabled={currentPage === 1}
-          >
-            Previous
-          </button>
-          <span>
-            Page {currentPage} of {totalPages}
-          </span>
-          <button
-            className="btn btn-secondary"
-            onClick={handleNext}
-            disabled={currentPage === totalPages}
-          >
-            Next
-          </button>
-        </div>
+  <button
+    className="btn btn-secondary"
+    onClick={handlePrevious}
+    disabled={currentPage === 1}
+  >
+    Previous
+  </button>
+  <span>
+    Page 
+    <input
+      type="text"
+      value={inputValue}
+      onChange={(e) => handlePageInput(e.target.value)}
+      onKeyDown={(e) => {
+        if (e.key === "Enter") {
+          handlePageJump();
+        }
+      }}
+      style={{ width: "50px", textAlign: "center", marginLeft: "5px", marginRight: "5px" }}
+    />
+    of {totalPages}
+  </span>
+  <button
+    className="btn btn-secondary"
+    onClick={handleNext}
+    disabled={currentPage === totalPages}
+  >
+    Next
+  </button>
+</div>
       </div>
     </div>
   );

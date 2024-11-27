@@ -17,15 +17,14 @@ const Update = () => {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `https://jsonplaceholder.typicode.com/users/${id}`
+        `https://6747148d38c8741641d54f0f.mockapi.io/users/${id}`
       );
       const user = response.data;
-      const nameParts = user.name ? user.name.split(" ") : [""];
       setValues({
-        firstname: nameParts[0] || "",
-        lastname: nameParts.slice(1).join(" ") || "",
+        firstname: user.firstname || "",
+        lastname: user.lastname || "",
         email: user.email || "",
-        department: user.company?.bs || "",
+        department: user.department || "",
       });
     } catch (error) {
       alert("Error Fetching the data: " + error);
@@ -40,7 +39,7 @@ const Update = () => {
     e.preventDefault();
     try {
       const response = await axios.put(
-        "https://jsonplaceholder.typicode.com/users/" + id,
+        "https://6747148d38c8741641d54f0f.mockapi.io/users/" + id,
         values
       );
       console.log(response.data);

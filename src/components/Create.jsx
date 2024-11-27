@@ -28,7 +28,7 @@ const Create = () => {
 
     try {
       const response = await axios.post(
-        "https://jsonplaceholder.typicode.com/users",
+        "https://6747148d38c8741641d54f0f.mockapi.io/users",
         values
       );
       console.log(response.data);

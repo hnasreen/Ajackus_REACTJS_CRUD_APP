@@ -9,7 +9,7 @@ const View = () => {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `https://jsonplaceholder.typicode.com/users/${id}`
+        `https://6747148d38c8741641d54f0f.mockapi.io/users/${id}`
       );
       setData(response.data);
     } catch (error) {
@@ -20,10 +20,6 @@ const View = () => {
   useEffect(() => {
     fetchData();
   }, [id]);
-
-  const nameParts = data.name ? data.name.split(" ") : [""];
-  const firstName = nameParts[0] || "N/A";
-  const lastName = nameParts.slice(1).join(" ") || "N/A";
 
   return (
     <div className="d-flex w-100 vh-100 justify-content-center align-items-center bg-light">
@@ -40,9 +36,8 @@ const View = () => {
               fontSize: "2rem",
             }}
           >
-            {firstName[0] || "U"}
           </div>
-          <h3 className="mb-2">{data.name || "N/A"}</h3>
+          <h3 className="mb-2">{data.firstname || "N/A"}</h3>
           <p className="text-muted">ID: {data.id || "N/A"}</p>
         </div>
 
@@ -51,11 +46,11 @@ const View = () => {
         <div className="mt-3">
           <div className="d-flex justify-content-between align-items-center py-2 border-bottom">
             <strong>First Name:</strong>
-            <span>{firstName}</span>
+            <span>{data.firstname}</span>
           </div>
           <div className="d-flex justify-content-between align-items-center py-2 border-bottom">
             <strong>Last Name:</strong>
-            <span>{lastName}</span>
+            <span>{data.lastname}</span>
           </div>
           <div className="d-flex justify-content-between align-items-center py-2 border-bottom">
             <strong>Email:</strong>
@@ -63,7 +58,7 @@ const View = () => {
           </div>
           <div className="d-flex justify-content-between align-items-center py-2 border-bottom">
             <strong>Department:</strong>
-            <span>{data.company?.bs || "N/A"}</span>
+            <span>{data.department || "N/A"}</span>
           </div>
         </div>
 
